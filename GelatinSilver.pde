@@ -3,7 +3,7 @@ class GelatinSilver{
    int imgHeight=700;
    int imgWidth=700;
    Particle pList[][];
-   int pixSize=20;  
+   int pixSize=10;  
    float pixSize2;
 
    
@@ -66,15 +66,23 @@ class GelatinSilver{
      for(int i=0;i<imgWidth/pixSize;i++){
       for(int j=0;j<imgHeight/pixSize;j++){
       pList[i][j].setRange(z1,z2);
-      pixSize2=map(mouseX,0,width,pixSize,2*pixSize);
+      pixSize2=map(mouseX,0,width,pixSize,3*pixSize);
       pushMatrix();     
       float zpos=pList[i][j].getZ();
-      translate(i*pixSize2-int(map(mouseX,0,width,700,1400))/2
-      ,j*pixSize2-int(map(mouseX,0,width,700,1400))/2,0);
+      translate(i*pixSize2-int(map(mouseX,0,width,700,2100))/2
+      ,j*pixSize2-int(map(mouseX,0,width,700,2100))/2,0);
       pList[i][j].draw();
       popMatrix();
       }
      }        
+   }
+   
+   int getWidth(){
+     return imgWidth;
+   }
+   
+   int getHeight(){
+     return imgHeight;
    }
    
 

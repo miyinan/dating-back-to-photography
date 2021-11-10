@@ -36,7 +36,7 @@ class Particle{
     pushMatrix();
     fill(pCol);
     noStroke();
-    float alpha=map(mouseX,0,width,0,2);
+    float alpha=map(mouseX,0,width,0,3);
     translate(alpha*xPos,alpha*yPos,zPos);
     //println();
     box(size);

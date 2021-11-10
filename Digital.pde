@@ -3,8 +3,8 @@ class Digital{
   int pixSize=20;
   int redList[][],blueList[][],greenList[][];
   float brightnessList[][];
-  float imgHeight=700;
-  float imgWidth=700;
+  int imgHeight=700;
+  int imgWidth=700;
   PFont mono;
   
   
@@ -102,4 +102,16 @@ class Digital{
     image(img, 0, 0,imgWidth,imgHeight);
   }
   
+  void setWidth_Height(int x){
+     imgHeight=x;
+     imgWidth=x;
+   }  
+  
+  int getWidth(){
+     return imgWidth;
+   }
+   
+   int getHeight(){
+     return imgHeight;
+   }
 }

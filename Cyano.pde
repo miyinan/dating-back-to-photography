@@ -1,7 +1,7 @@
 class Cyano{
    PImage cyano,exposed,paper,negative,waterPic;
-   float imgHeight=700;
-   float imgWidth=700;
+   int imgHeight=700;
+   int imgWidth=700;
    
    Cyano(){
      cyano=loadImage("cyano.jpg");
@@ -40,9 +40,16 @@ class Cyano{
     m.read();
 }
 
-void setWidth_Height(int x){
+   void setWidth_Height(int x){
      imgHeight=x;
      imgWidth=x;
    }
    
+     int getWidth(){
+     return imgWidth;
+   }
+   
+   int getHeight(){
+     return imgHeight;
+   }
 }
