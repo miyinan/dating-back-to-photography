@@ -24,7 +24,7 @@ Movie m;
 
 void setup() {
   frameRate(30);
-  size(1200, 900,P3D);
+  size(1400, 900,P3D);
     gelatinSilver= new GelatinSilver();
     digital = new Digital();
     cyano = new Cyano();
@@ -32,10 +32,6 @@ void setup() {
     daguerreo = new Daguerreo();
     m = new Movie (this, "cyano_video.mov");
     img=loadImage("gelatinsilver_negative.jpg");   
-       
-
-    
-    
 }
 
 void draw(){
@@ -65,7 +61,7 @@ void draw(){
     case 5:
     cameraZ=800;digitalMode();digital.setWidth_Height(700);break;
     case 0:
-    cameraZ=2000;lastPage();break;
+    cameraZ=1800;lastPage();break;
     case 9:
     cameraZ=1600;firstPage();break;
   }  
@@ -114,77 +110,71 @@ void keyPressed() {
 
 void lastPage(){
   
-  
-
-  
  //daguerreo
-    daguerreo.setWidth_Height(450);
+    daguerreo.setWidth_Height(470);
     if(lastCount!=-1){lastCount+=1;}
     if(lastCount>=100){count=-1;}
     pushMatrix();
-    translate(-500,-500,2*interval);
+    translate(-1000,-2*interval,2*interval);
     translate(-daguerreo.getWidth()/2,-daguerreo.getHeight()/2,0);
     if(lastCount==-1){
     daguerreo.displayDague(255);
   }
-    else{daguerreo.displayDague(int(map(lastCount,0,100,0,255)));daguerreo.displayMetal(255-int(map(lastCount,0,100,0,255)));}
-    
+    else{daguerreo.displayDague(int(map(lastCount,0,100,0,255)));daguerreo.displayMetal(255-int(map(lastCount,0,100,0,255)));}    
     popMatrix();
     
  //calo
-    for(int i=0;i<5;i+=1){
+    for(int i=0;i<4;i+=1){
     pushMatrix();
     calo.setWidth_Height(450);
-    translate(500,-500,1*interval);
-    translate(-imgWidth/2,-imgHeight/2,interval*(i-int(num/2)));  
+    translate(-500,-1*interval,1*interval);
+    translate(-calo.getWidth()/2,-calo.getHeight()/2,interval*(i-int(num/2)));  
     
-    if(i==0){calo.displayCalo(255);}  
-    if(i==1){calo.displayCalo(255);}
-    if(i==2){calo.displayCalo(255);}            
-    if(i==3){calo.displayCalo(255);}          
-    if(i==4){calo.displayNegative();}     
+    if(i==0){calo.displayCalo(255);}
+    if(i==1){calo.displayCalo(255);}            
+    if(i==2){calo.displayCalo(255);}          
+    if(i==3){calo.displayNegative();}     
     popMatrix();
   }
 
 
  //cyano
- pushMatrix();
- cyano.setWidth_Height(450);
- translate(0,0,-0.3*interval);
+   pushMatrix();
+   cyano.setWidth_Height(450);
+   translate(0,0,-0.3*interval);
    for(int i=0;i<num;i+=1){
     pushMatrix();
-    translate(-imgWidth/2,-imgHeight/2,interval*(i-int(num/2)+1));      
+    translate(-cyano.getWidth()/2,-cyano.getHeight()/2,interval*(i-int(num/2)+1));      
     if(i==0){cyano.displayCyano();} 
-    if(i==1){cyano.displayExposed();}            
-    if(i==2){cyano.displayPaper();}          
+    if(i==1){cyano.displayExposed(255);}            
+    if(i==2){cyano.displayPaper(150);}          
     if(i==3){cyano.displayNegative();}               
     popMatrix();
   }
   popMatrix();
     
-
-
-  //gelatinSilver
+//gelatinSilver
  
-  gelatinSilver.setWidth_Height(450);
+  gelatinSilver.setWidth_Height(460);
   for(int i=0;i<num;i+=1){
     pushMatrix();
-    translate(-500,500,-1*interval);
-    translate(-imgWidth/2,-imgHeight/2,interval*1.5*(i-int(num/2)+1));  
+    translate(500,1*interval,-1*interval);
+    translate(-gelatinSilver.getWidth()/2,-gelatinSilver.getHeight()/2,interval*1.5*(i-int(num/2)+1));  
     
     if(i==0){gelatinSilver.displayEnlarge(int(map(mouseX,0,width,400,800)));}            
-    if(i==1){gelatinSilver.displayNegative(200);}          
+    if(i==1){gelatinSilver.displayNegative(150);}          
     if(i==2){gelatinSilver.displayFilm();}      
     if(i==3){gelatinSilver.displayExpose();}      
     popMatrix();
   }
   
-   //digital
+//digital
+
   digital.setWidth_Height(450);
   for(int i=0;i<5;i+=1){
     pushMatrix();    
-    translate(500,500,-2*interval);
-    translate(-imgWidth/2,-imgHeight/2,interval*(i-int(num/2)));  
+    translate(1000,2*interval,-2*interval);
+    translate(-digital.getWidth()/2,-digital.getHeight()/2,interval*(i-int(num/2)));  
     digital.processImg();
    
     if(i==1){digital.layerBrightness();}
@@ -221,9 +211,7 @@ void gelatinsilverMode(){
     translate(-gelatinSilver.getWidth()/2,-gelatinSilver.getHeight()/2,0);
     int de=int(map(count,0,40,0,100));
     gelatinSilver.displayNegative(de);
-    popMatrix();
-    
-    
+    popMatrix();        
   }
   
   if(state==2){   
@@ -303,8 +291,7 @@ void daguerreoMode(){
 
 }
 
-void caloMode(){
-    
+void caloMode(){    
   if(state==0){
       pushMatrix();
       translate(-calo.getWidth()/2,-calo.getHeight()/2,0);
@@ -327,23 +314,18 @@ void caloMode(){
         calo.displayCalo(200);
         popMatrix();
       }
-
       int x= (calonum-1-calonum/2)*(calo.getWidth()+80);      
       pushMatrix();              
         translate(x,-calo.getHeight()/2,0);
         calo.displayPaper(255-map(count,0,100,0,255));
       popMatrix();
-      
       pushMatrix();              
         translate(x,-calo.getHeight()/2,0);   
         if(count==-1){
         calo.displayCalo(255);}else{
-        calo.displayCalo(map(count,0,100,0,255));}
-        
-      popMatrix();
-            
-      pushMatrix();             
-         
+        calo.displayCalo(map(count,0,100,0,255));}        
+      popMatrix();            
+      pushMatrix();                      
         if(count!=-1&&count<150){
           translate(x,-calo.getHeight()/2,count*2+100); 
         }else{
@@ -351,22 +333,18 @@ void caloMode(){
         }
         calo.displayNegative();
       popMatrix();
-
-
   }
   if(state==2){
     calonum+=1;  
     count=0;
-    state=1;    
-    
+    state=1;        
   }  
 }
-
 void cyanoMode(){  
   if(state==0){
     pushMatrix();
     translate(-cyano.getWidth()/2,-cyano.getHeight()/2,0);
-    cyano.displayExposed();
+    cyano.displayPaper(255);
     popMatrix();
   }
   if(state==1){
@@ -376,14 +354,20 @@ void cyanoMode(){
       count=0;       
     }
     */
+    background(map(count,0,100,0,255));
+    pushMatrix();
+    translate(-cyano.getWidth()/2,-cyano.getHeight()/2,0);
+    cyano.displayPaper(255-int(map(count,0,100,0,255)));
+    cyano.displayExposed(int(map(count,0,100,0,255)));
+    popMatrix();
     
-    background(map(count,0,500,0,255));
+    if(count>=100){
     pushMatrix();
     translate(-cyano.getWidth()/2,-cyano.getHeight()/2,0);
     image(m, 0, 0,700,700); 
     m.play();
     m.noLoop();  
-    popMatrix();
+    popMatrix();}
     
   }
   if(state==2){ 
@@ -394,14 +378,13 @@ void cyanoMode(){
     translate(-cyano.getWidth()/2,-cyano.getHeight()/2+20,0);
     translate(0,0,1.5*interval*(i-int(num/2)+1));      
     if(i==0){cyano.displayCyano();text("Cyano-photograph",cyano.getWidth()/2,-20);} 
-    if(i==1){cyano.displayExposed();text("Exposed-paper",cyano.getWidth()/2,-20);}            
-    if(i==2){cyano.displayPaper();text("Photosensitive-paper",cyano.getWidth()/2,-20);}          
+    if(i==1){cyano.displayExposed(200);text("Exposed-paper",cyano.getWidth()/2,-20);}            
+    if(i==2){cyano.displayPaper(150);text("Photosensitive-paper",cyano.getWidth()/2,-20);}          
     if(i==3){cyano.displayNegative();text("Negative-film",cyano.getWidth()/2,-20);}               
     popMatrix();
   } 
   }
 }
-
 void changeState(){
   state+=1;
   if(state>stateMax){
@@ -412,9 +395,9 @@ void changeState(){
 void firstPage(){ 
   //daguerreo
   pushMatrix();
-    translate(-500,-500,0);
-    translate(-daguerreo.getWidth()/2,-daguerreo.getHeight()/2,4*interval);
-    daguerreo.setWidth_Height(450);
+    translate(-1000,0,0);
+    daguerreo.setWidth_Height(470);
+    translate(-daguerreo.getWidth()/2,-daguerreo.getHeight()/2,4*interval);    
     daguerreo.displayDague(255);   
   popMatrix();
   
@@ -422,9 +405,9 @@ void firstPage(){
   //calo
   
   pushMatrix();
-    translate(500,-500,0);
-    translate(-250,-250,2*interval);
+    translate(-500,0,0);
     calo.setWidth_Height(450);
+    translate(-calo.getWidth()/2,-calo.getHeight()/2,2*interval);    
     calo.displayCalo(255);    
   popMatrix();
   
@@ -432,26 +415,26 @@ void firstPage(){
  
   pushMatrix();
     translate(0,0,0);
-    translate(-250,-250,-0.3*interval);
     cyano.setWidth_Height(450);
+    translate(-cyano.getWidth()/2,-cyano.getWidth()/2,-0.3*interval);
     cyano.displayCyano();    
   popMatrix();
   
   //gelatinSilver
   
   pushMatrix();
-    translate(-500,500,0);
-    translate(-250,-250,-2*interval);
-    gelatinSilver.setWidth_Height(450);
+    translate(500,0,0);
+    gelatinSilver.setWidth_Height(460);
+    translate(-gelatinSilver.getWidth()/2,-gelatinSilver.getHeight()/2,-2*interval);
     gelatinSilver.displayEnlarge(450);    
   popMatrix();
   
   //digital
   
   pushMatrix();
-    translate(500,500,0);
-    translate(-digital.getWidth()/2,-digital.getHeight()/2,-4*interval);
+    translate(1000,0,0);
     digital.setWidth_Height(450);
+    translate(-digital.getWidth()/2,-digital.getHeight()/2,-4*interval);
     digital.displayImg(); 
   popMatrix();
   

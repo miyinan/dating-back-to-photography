@@ -5,13 +5,13 @@ class Cyano{
    
    Cyano(){
      cyano=loadImage("cyano.jpg");
-     paper=loadImage("cyano_paper.jpg");
+     paper=loadImage("cyano_paper.png");
      exposed=loadImage("cyano_exposed.jpg");
      negative=loadImage("cyano_negative.jpg");
    }
    
-   void displayExposed(){
-     tint(255,255);     
+   void displayExposed(int de){
+     tint(255,de);     
      image(exposed, 0, 0,imgWidth,imgHeight); 
 
    }
@@ -21,8 +21,8 @@ class Cyano{
      image(negative, 0, 0,imgWidth,imgHeight);      
    }
    
-   void displayPaper(){
-     tint(255,255);
+   void displayPaper(int de){
+     tint(255,de);
      image(paper, 0, 0,imgWidth,imgHeight);      
    }
    

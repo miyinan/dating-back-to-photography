@@ -20,12 +20,11 @@ class GelatinSilver{
       pList[i][j] = new Particle();
       }
      }     
-     this.processImg();
-    
+     this.processImg();    
    }
    
    void displayExpose(){
-     tint(255,200);
+     tint(255,150);
      image(enlarge, 0, 0,imgWidth,imgHeight); 
 
    }
@@ -36,7 +35,7 @@ class GelatinSilver{
    }
    
    void displayFilm(){
-     tint(255,255);
+     tint(255,100);
      image(film, 0, 0,imgWidth,imgHeight);      
    }
    
@@ -68,7 +67,6 @@ class GelatinSilver{
       pList[i][j].setRange(z1,z2);
       pixSize2=map(mouseX,0,width,pixSize,3*pixSize);
       pushMatrix();     
-      float zpos=pList[i][j].getZ();
       translate(i*pixSize2-int(map(mouseX,0,width,700,2100))/2
       ,j*pixSize2-int(map(mouseX,0,width,700,2100))/2,0);
       pList[i][j].draw();
